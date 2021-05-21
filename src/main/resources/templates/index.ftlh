@@ -19,6 +19,7 @@
 <#else>
     <ul>
         <li>Привет, ${user.get().getUsername()}!</li>
+        <#if isAdmin?has_content><li><a href="/admin">Админ-панель</a></li></#if>
         <li><a href="/user">Моя страница</a></li>
         <li><a href="/polls">Мои опросы</a></li>
         <li><a href="/user/edit">Редактировать информацию</a></li>

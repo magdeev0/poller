@@ -1,5 +1,6 @@
 package net.magdeev.poller.controller;
 
+import net.magdeev.poller.entity.Role;
 import net.magdeev.poller.service.UserServiceImpl;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -20,6 +21,9 @@ public class MainController {
         }
         if (userService.isLogged()) {
             model.addAttribute("user", userService.findAuthorizedByUsername());
+            if (userService.findAuthorizedByUsername().get().getRoles().contains(Role.ADMIN)) {
+                model.addAttribute("isAdmin", "true");
+            }
         } else {
             model.addAttribute("isAnonymous", "anonymous");
         }
