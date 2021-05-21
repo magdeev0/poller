@@ -12,7 +12,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
-import java.io.InputStream;
 
 @Controller
 public class UserController {
@@ -95,16 +94,14 @@ public class UserController {
     }
 
     @GetMapping("/user/uploadAvatar")
-    public String uploadAvatar(Model model) {
-        model.addAttribute("user", userService.findAuthorizedByUsername());
+    public String uploadAvatar() {
         return "users/uploadAvatar";
     }
 
     @PostMapping("/user/uploadAvatar")
-    public String uploadAvatar(@RequestParam("file") MultipartFile file) throws IOException {
+    public String uploadAvatar(@RequestParam("file") MultipartFile file, Model model) {
         final var user = userService.findAuthorizedByUsername();
-        InputStream is = file.getInputStream();
-        userRepository.updateAvatar(is.readAllBytes(), user.get().getId());
-        return "redirect:/user/" + user.get().getId();
+        model.addAttribute("message", userService.updateAvatar(user.get().getId(), file));
+        return "users/uploadAvatar";
     }
 }

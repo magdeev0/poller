@@ -1,6 +1,7 @@
 package net.magdeev.poller.service;
 
 import net.magdeev.poller.entity.User;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.Optional;
 
@@ -24,4 +25,6 @@ public interface UserService {
     boolean isFirstInit();
 
     void initAdmin();
+
+    String updateAvatar(Long id, MultipartFile file);
 }

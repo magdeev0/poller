@@ -10,7 +10,10 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.*;
 
 @Service
@@ -68,6 +71,16 @@ public class UserServiceImpl implements UserService, UserDetailsService {
         List<Role> roles = Arrays.asList(Role.USER, Role.ADMIN);
         // TODO: change standard pass
         userRepository.save(new User("admin", passwordEncoder.encode("password"), "secret", new HashSet<>(roles)));
+    }
+
+    @Override
+    public String updateAvatar(Long id, MultipartFile file) {
+        try {
+            userRepository.updateAvatar(id, file.getInputStream().readAllBytes());
+        } catch (IOException e) {
+            return "Ошибка при загрузке файла";
+        }
+        return "Файл успешно загружен";
     }
 
     @Override

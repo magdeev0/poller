@@ -27,6 +27,6 @@ public interface UserRepository extends JpaRepository<User, Long> {
     @Modifying
     @Transactional
     @Query("update User u set u.file = :file where u.id = :id")
-    void updateAvatar(@Param("file") byte[] file,
-                      @Param("id") Long id);
+    void updateAvatar(@Param("id") Long id,
+                      @Param("file") byte[] file);
 }
