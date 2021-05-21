@@ -2,13 +2,13 @@ name: Build
 
 on:
   push:
-    branches: [ master, main ]
+    branches: [ master ]
 
 jobs:
   build:
     runs-on: ubuntu-latest
 
-      steps:
+    steps:
         - uses: actions/checkout@v2
         - name: Push to GitHub Packages
           uses: docker/build-push-action@v1
