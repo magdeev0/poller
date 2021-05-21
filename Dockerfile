@@ -1,7 +1,5 @@
-FROM openjdk:11 AS build
-COPY src/main/java/net/magdeev/poller/PollerApplication.java .
-RUN javac PollerApplication.java
-
-FROM openjdk:11
-COPY --from=build PollerApplication.class .
-CMD ["java", "PollerApplication"]
+FROM adoptopenjdk:11-jre-hotspot
+ARG JAR_FILE=target/*.jar
+COPY ${JAR_FILE} application.jar
+EXPOSE 8080
+ENTRYPOINT ["java","-jar","/application.jar"]
