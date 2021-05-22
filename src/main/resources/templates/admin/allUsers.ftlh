@@ -33,7 +33,7 @@
             </tr>
             <#list users as user>
                 <tr>
-                    <td><a href="/user/${user.get().getId()}">${user.getUsername()}</a></td>
+                    <td><a href="/user/${user.getId()}">${user.getUsername()}</a></td>
                     <td><#list user.getRoles() as role>${role}<#sep>, </#sep></#list></td>
                 </tr>
             </#list>
