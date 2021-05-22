@@ -79,7 +79,7 @@ public class PollsController {
     @PostMapping("/poll/{id}")
     public String sendPoll(@PathVariable Long id, HttpServletRequest request) {
         pollService.send(id, request);
-        return "redirect:/poll/result/" + id;
+        return "redirect:/poll/results/" + id;
     }
 
     @GetMapping("/poll/results/{id}")
